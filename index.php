@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta property="og:title" content="Wine Price Search"/>
+    <meta property="og:image" content="http://wine.chan15.info/assets/imgs/looking_for_wine.jpg"/>
+    <meta property="og:site_name" content="David Walsh Blog"/>
+    <meta property="og:description" content="comparing win price">
     <title>Wine Price Search</title>
     <link href='https://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="assets/css/build/style.css">
