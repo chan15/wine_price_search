@@ -24,17 +24,19 @@ class CWine implements WineInterface
             $items = $dom->find('.productListing-data');
 
             foreach ($items as $item) {
-                $text = $item->find('a', 1)->plaintext;
+                if ($item->find('a', 1)) {
+                    $text = $item->find('a', 1)->plaintext;
 
-                if (stristr($text, 'nt') !== false) {
-                    $img = '<img src="'.$domain.$item->find('img', 0)->src.'">';
-                    $url = $item->find('a', 0)->href;
+                    if (stristr($text, 'nt') !== false) {
+                        $img = '<img src="'.$domain.$item->find('img', 0)->src.'">';
+                        $url = $item->find('a', 0)->href;
 
-                    $result .= '<li>';
-                    $result .= '<div class="text-center">'.$img.'</div>';
-                    $result .= '<h3>忠佳洋酒</h3>';
-                    $result .= '<p><a href="'.$url.'" target="_blank">'.$text.'</a></p>';
-                    $result .= '</li>';
+                        $result .= '<li>';
+                        $result .= '<div class="text-center">'.$img.'</div>';
+                        $result .= '<h3>忠佳洋酒</h3>';
+                        $result .= '<p><a href="'.$url.'" target="_blank">'.$text.'</a></p>';
+                        $result .= '</li>';
+                    }
                 }
             }
         }
