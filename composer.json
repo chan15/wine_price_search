@@ -1,0 +1,11 @@
+{
+    "require": {
+        "sunra/php-simple-html-dom-parser": "^1.5",
+        "php-curl-class/php-curl-class": "^4.11"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
