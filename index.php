@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Wine Price Search</title>
+    <link href='https://fonts.googleapis.com/css?family=Oswald:400,700,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="assets/css/build/style.css">
     <script src="assets/js/build/vendor.bundle.js"></script>
     <script src="assets/js/build/index.js"></script>
@@ -11,7 +13,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3>Wine Price Search</h3>
+                <h3 class="title">Wine Price Search</h3>
             </div>
             <div class="col-md-12">
                 <form class="form-inline" id="wine_form">
