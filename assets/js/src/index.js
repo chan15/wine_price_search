@@ -14,7 +14,16 @@ $(function() {
         },
         dataType: 'json',
         success: (response) => {
-            ajaxContent.html(response.html);
+            if (response.html === '') {
+                ajaxContent.html('<li>沒有相關結果</li>');
+            } else {
+                ajaxContent.html(response.html);
+            }
+
+            loader.addClass('hide');
+        },
+        error: () => {
+            alert('搜尋發生錯誤');
             loader.addClass('hide');
         }
     });
