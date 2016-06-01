@@ -28,7 +28,11 @@ class JiaPin implements WineInterface
         if ($items) {
             foreach ($items as $item) {
                 $url = $this->domain.$item->find('a', 0)->href;
-                $result .= $this->grabSubUrl($url);
+                $r = $this->grabSubUrl($url);
+
+                if ($r !== '') {
+                    $result .= $this->grabSubUrl($url);
+                }
             }
         }
 
@@ -48,15 +52,19 @@ class JiaPin implements WineInterface
         $result = '';
 
         $dom = HtmlDomParser::str_get_html($html);
-        $price = ' NT'.$dom->find('.red_f', 0)->plaintext;
-        $img = '<img src="'.$this->domain.$dom->find('.p_big', 0)->find('img', 0)->src.'">';
-        $text = $dom->find('.np_title', 0)->plaintext;
+        $priceItem = $dom->find('.red_f', 0);
 
-        $result .= '<li>';
-        $result .= '<div class="text-center">'.$img.'</div>';
-        $result .= '<h3>珈品洋酒</h3>';
-        $result .= '<p><a href="'.$url.'" target="_blank">'.$text.$price.'</a></p>';
-        $result .= '</li>';
+        if ($priceItem) {
+            $price = ' NT'.$priceItem->plaintext;
+            $img = '<img src="'.$this->domain.$dom->find('.p_big', 0)->find('img', 0)->src.'">';
+            $text = $dom->find('.np_title', 0)->plaintext;
+
+            $result .= '<li>';
+            $result .= '<div class="text-center">'.$img.'</div>';
+            $result .= '<h3>珈品洋酒</h3>';
+            $result .= '<p><a href="'.$url.'" target="_blank">'.$text.$price.'</a></p>';
+            $result .= '</li>';
+        }
 
         $dom->clear();
         $curl->close();
