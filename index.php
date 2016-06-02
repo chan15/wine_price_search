@@ -48,5 +48,12 @@
             </div>
         </div>
     </div>
+    <script id="myTemplate" type="text/x-jsrender">
+        <li>
+            <div class="text-center">{{:img}}</div>
+            <h3>{{:vendorName}}</h3>
+            <p><a href="{{:url}}" target="_blank">{{:title}}</a></p>
+        </li>
+    </script>
 </body>
 </html>

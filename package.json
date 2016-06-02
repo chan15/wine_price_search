@@ -19,6 +19,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "jquery": "^2.2.4",
-    "jquery-form": "^3.50.0"
+    "jquery-form": "^3.50.0",
+    "jsrender": "^0.9.76"
   }
 }

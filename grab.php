@@ -8,14 +8,14 @@ include 'vendor/autoload.php';
 
 use App\Wine\WineData;
 
-$html = '';
+$html = [];
 $wineName = $_GET['wine_name'];
 $sources = $_GET['source'];
 
 foreach ($sources as $source) {
     $className = "App\\Wine\\Vendor\\$source";
     $wineData = new WineData(new $className());
-    $html .= $wineData->getPriceList($wineName);
+    $html = array_merge($html, $wineData->getPriceList($wineName));
 }
 
 echo json_encode(compact('html'));

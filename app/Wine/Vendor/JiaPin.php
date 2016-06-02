@@ -23,15 +23,15 @@ class JiaPin implements WineInterface
         $html = $curl->response;
         $dom = HtmlDomParser::str_get_html($html);
         $items = $dom->find('.p_img');
-        $result = '';
+        $result = [];
 
         if ($items) {
             foreach ($items as $item) {
                 $url = $this->domain.$item->find('a', 0)->href;
                 $r = $this->grabSubUrl($url);
 
-                if ($r !== '') {
-                    $result .= $this->grabSubUrl($url);
+                if (count($r) > 0) {
+                    $result[] = $r;
                 }
             }
         }
@@ -49,7 +49,7 @@ class JiaPin implements WineInterface
         $curl->setopt(CURLOPT_USERAGENT, 'Google Bot');
         $curl->get($url);
         $html = $curl->response;
-        $result = '';
+        $result = [];
 
         $dom = HtmlDomParser::str_get_html($html);
         $priceItem = $dom->find('.red_f', 0);
@@ -59,11 +59,12 @@ class JiaPin implements WineInterface
             $img = '<img src="'.$this->domain.$dom->find('.p_big', 0)->find('img', 0)->src.'">';
             $text = $dom->find('.np_title', 0)->plaintext;
 
-            $result .= '<li>';
-            $result .= '<div class="text-center">'.$img.'</div>';
-            $result .= '<h3>珈品洋酒</h3>';
-            $result .= '<p><a href="'.$url.'" target="_blank">'.$text.$price.'</a></p>';
-            $result .= '</li>';
+            $result = [
+                'img' => $img,
+                'vendorName' => '珈品洋酒',
+                'url' => $url,
+                'title' => $text.$price
+            ];
         }
 
         $dom->clear();

@@ -18,7 +18,7 @@ class CWine implements WineInterface
         $html = $curl->response;
         $dom = HtmlDomParser::str_get_html($html);
         $domain = 'http://www.ccwine.com.tw/';
-        $result = '';
+        $result = [];
 
         if ($dom->find('.productListing-data', 0)->plaintext !== '無符合搜尋條件的商品') {
             $items = $dom->find('.productListing-data');
@@ -31,11 +31,12 @@ class CWine implements WineInterface
                         $img = '<img src="'.$domain.$item->find('img', 0)->src.'">';
                         $url = $item->find('a', 0)->href;
 
-                        $result .= '<li>';
-                        $result .= '<div class="text-center">'.$img.'</div>';
-                        $result .= '<h3>忠佳洋酒</h3>';
-                        $result .= '<p><a href="'.$url.'" target="_blank">'.$text.'</a></p>';
-                        $result .= '</li>';
+                        $result[] = [
+                            'img' => $img,
+                            'vendorName' => '忠佳洋酒',
+                            'url' => $url,
+                            'title' => $text
+                        ];
                     }
                 }
             }

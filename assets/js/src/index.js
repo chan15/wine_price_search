@@ -1,4 +1,5 @@
 require('jquery-form');
+require('jsrender')($);
 
 $(function() {
     let wineName = $('#wine_name').focus();
@@ -14,12 +15,15 @@ $(function() {
         },
         dataType: 'json',
         success: (response) => {
-            if (response.html === '') {
-                ajaxContent.html('<li>沒有相關結果</li>');
+            let html = '';
+
+            if (response.html.length === 0) {
+                html = '<li>沒有相關結果</li>';
             } else {
-                ajaxContent.html(response.html);
+                html = $('#myTemplate').render(response.html);
             }
 
+            ajaxContent.html(html);
             loader.addClass('hide');
         },
         error: () => {

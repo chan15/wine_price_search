@@ -18,7 +18,7 @@ class NineCity implements WineInterface
         $html = $curl->response;
         $dom = HtmlDomParser::str_get_html($html);
         $items = $dom->find('.product_box');
-        $result = '';
+        $result = [];
 
         if (count($items) > 0) {
             foreach ($items as $item) {
@@ -29,12 +29,12 @@ class NineCity implements WineInterface
                     $img = '<img src="'.$item->find('img', 0)->src.'">';
                     $url = $item->find('a', 0)->href;
                     $text = $item->find('a', 2)->plaintext;
-
-                    $result .= '<li>';
-                    $result .= '<div class="text-center">'.$img.'</div>';
-                    $result .= '<h3>洋酒城</h3>';
-                    $result .= '<p><a href="'.$url.'" target="_blank">'.$text.' NT$'.$price.'</a></p>';
-                    $result .= '</li>';
+                    $result[] = [
+                        'img' => $img,
+                        'vendorName' => '洋酒城',
+                        'url' => $url,
+                        'title' => $text.' NT$'.$price
+                    ];
                 }
             }
         }
